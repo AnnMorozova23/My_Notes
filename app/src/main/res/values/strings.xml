@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My_Notes</string>
+    <string name="note_1">Заметка №1 </string>
+    <string name="note_2">Заметка №2</string>
+    <string name="note_3">Заметка №3</string>
+    <string name="description">Описание</string>
+    <string name="description_2">Описание №2</string>
+    <string name="description_3">Описание №3</string>
+    <string name="description_text">Введите текст заметки</string>
 </resources>
