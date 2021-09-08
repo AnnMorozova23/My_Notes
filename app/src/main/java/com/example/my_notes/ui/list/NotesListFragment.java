@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.my_notes.R;
@@ -57,6 +58,7 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         presenter = new NoteListPresenter(this, new DeviceNotesRepository());
     }
