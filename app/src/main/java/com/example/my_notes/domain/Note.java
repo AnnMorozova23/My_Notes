@@ -3,14 +3,26 @@ package com.example.my_notes.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.StringRes;
+import java.util.Objects;
 
 public class Note implements Parcelable {
 
+    private final String id;
+
+    private String title;
+
+    private final String imageUrl;
+
+    public Note(String id, String title, String imageUrl) {
+        this.title = title;
+        this.id = id;
+        this.imageUrl = imageUrl;
+    }
+
     protected Note(Parcel in) {
-        name = in.readInt();
-        description = in.readInt();
-        createData = in.readInt();
+        id = in.readString();
+        title = in.readString();
+        imageUrl = in.readString();
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -25,44 +37,36 @@ public class Note implements Parcelable {
         }
     };
 
-    public int getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(int name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public int getDescription() {
-        return description;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setDescription(int description) {
-        this.description = description;
+    public String getId() {
+        return id;
     }
 
-    public int getCreateData() {
-        return createData;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return Objects.equals(id, note.id) &&
+                Objects.equals(title, note.title) &&
+                Objects.equals(imageUrl, note.imageUrl);
     }
 
-    public void setCreateData(int createData) {
-        this.createData = createData;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, imageUrl);
     }
-
-    @StringRes
-    private int name;
-
-    @StringRes
-    private int description;
-
-    private int createData;
-
-    public Note(int name) {
-        this.name = name;
-        this.description = description;
-        this.createData = createData;
-    }
-
 
     @Override
     public int describeContents() {
@@ -70,9 +74,9 @@ public class Note implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(name);
-        parcel.writeInt(description);
-        parcel.writeInt(createData);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeString(imageUrl);
     }
 }

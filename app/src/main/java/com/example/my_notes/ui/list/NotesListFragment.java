@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,15 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.my_notes.R;
 import com.example.my_notes.domain.DeviceNotesRepository;
 import com.example.my_notes.domain.Note;
 import com.example.my_notes.ui.details.NoteDetailsActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NotesListFragment extends Fragment implements NotesListView {
+
+    private NoteAdapter adapter = new NoteAdapter();
 
     public interface onNoteOnClicked {
         void onNoteOnClicked(Note note);
@@ -33,9 +41,8 @@ public class NotesListFragment extends Fragment implements NotesListView {
 
     private NoteListPresenter presenter;
 
-    private LinearLayout container;
-
     private onNoteOnClicked onNoteOnClicked;
+    ImageView image = null;
 
 
     @Override
@@ -73,7 +80,24 @@ public class NotesListFragment extends Fragment implements NotesListView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        container = view.findViewById(R.id.root);
+        RecyclerView noteList = view.findViewById(R.id.notes_list);
+
+        noteList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        noteList.setAdapter(adapter);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.action_delete_all) {
+                    adapter.setNotes(Collections.emptyList());
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         presenter.requestNotes();
 
@@ -83,27 +107,18 @@ public class NotesListFragment extends Fragment implements NotesListView {
     @Override
     public void showNotes(List<Note> notes) {
 
-        for (Note note : notes) {
-            View noteItem = LayoutInflater.from(requireContext()).inflate(R.layout.item_notes, container, false);
+        adapter.setNotes(notes);
+        adapter.notifyDataSetChanged();
 
-            noteItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (onNoteOnClicked != null) {
-                        onNoteOnClicked.onNoteOnClicked(note);
-                    }
+    }
 
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(ARG_NOTE, note);
-                    getParentFragmentManager().setFragmentResult(KEY_SELECTED, bundle);
-                }
-            });
+    @Override
+    public void hideProgress() {
 
-            TextView noteName = noteItem.findViewById(R.id.note_name);
-            noteName.setText(note.getName());
+    }
 
-            container.addView(noteItem);
+    @Override
+    public void showProgress() {
 
-        }
     }
 }

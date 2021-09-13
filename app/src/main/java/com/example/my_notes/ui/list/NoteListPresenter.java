@@ -1,9 +1,13 @@
 package com.example.my_notes.ui.list;
 
+
 import com.example.my_notes.domain.Note;
 import com.example.my_notes.domain.NoteRepository;
 
 import java.util.List;
+
+import javax.security.auth.callback.Callback;
+
 
 public class NoteListPresenter {
 
@@ -17,8 +21,7 @@ public class NoteListPresenter {
     }
 
     public void requestNotes() {
-        List<Note> result = repository.getNotes();
+        view.showProgress();
 
-        view.showNotes(result);
     }
 }

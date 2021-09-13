@@ -84,7 +84,7 @@ public class NoteDetailsFragment extends Fragment {
     }
 
     private void displayNote(Note note) {
-        noteName.setText(note.getName());
+        noteName.setText(note.getTitle());
 
     }
 }
