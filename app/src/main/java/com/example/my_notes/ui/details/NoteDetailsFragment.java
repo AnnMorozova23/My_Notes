@@ -2,10 +2,12 @@ package com.example.my_notes.ui.details;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +34,23 @@ public class NoteDetailsFragment extends Fragment {
     }
 
     public NoteDetailsFragment() {
+
         super(R.layout.fragment_notes_details);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.search){
+            Toast.makeText(requireContext(), "Search", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if(item.getItemId() == R.id.action_settings){
+            Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private TextView noteName;
@@ -66,7 +84,7 @@ public class NoteDetailsFragment extends Fragment {
     }
 
     private void displayNote(Note note) {
-        noteName.setText(note.getName());
+        noteName.setText(note.getTitle());
 
     }
 }
