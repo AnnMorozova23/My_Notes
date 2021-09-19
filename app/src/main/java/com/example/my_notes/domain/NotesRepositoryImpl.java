@@ -16,7 +16,7 @@ public class NotesRepositoryImpl implements NotesRepository {
 
     ArrayList<Note> res = new ArrayList<>();
 
-    public NotesRepositoryImpl(){
+    public NotesRepositoryImpl() {
         res.add(new Note("id1", "Title 1", "https://images.freeimages.com/images/large-previews/241/night-fog-1521028.jpg"));
         res.add(new Note("id2", "Title 2", "https://images.freeimages.com/images/large-previews/10f/autumn-1-1382513.jpg"));
         res.add(new Note("id3", "Title 3", "https://images.freeimages.com/images/large-previews/bfd/clouds-1371838.jpg"));
@@ -99,8 +99,6 @@ public class NotesRepositoryImpl implements NotesRepository {
                 });
             }
         }).start();
-
-
 
 
     }

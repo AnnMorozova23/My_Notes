@@ -40,7 +40,7 @@ public class MainFragment extends Fragment implements RouterHolder, OnBackPresse
         super.onViewCreated(view, savedInstanceState);
 
         if (savedInstanceState == null) {
-         router.showNotesList();
+            router.showNotesList();
         }
 
         BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottom_nav_view);
@@ -65,7 +65,7 @@ public class MainFragment extends Fragment implements RouterHolder, OnBackPresse
 
     @Override
     public boolean onBackPressed() {
-        if(getChildFragmentManager().getBackStackEntryCount()>0){
+        if (getChildFragmentManager().getBackStackEntryCount() > 0) {
             getChildFragmentManager().popBackStack();
             return true;
         }

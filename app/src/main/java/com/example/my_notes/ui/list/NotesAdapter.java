@@ -35,7 +35,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     private Fragment fragment;
 
-    public NotesAdapter(Fragment fragment){
+    public NotesAdapter(Fragment fragment) {
         this.fragment = fragment;
 
     }
@@ -89,7 +89,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     public int removeNote(Note selectedNote) {
 
         for (int i = 0; i < data.size(); i++) {
-            if(data.get(i).equals(selectedNote)){
+            if (data.get(i).equals(selectedNote)) {
                 data.remove(i);
                 return i;
             }
@@ -100,7 +100,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
     public int updateNote(Note note) {
         for (int i = 0; i < data.size(); i++) {
-            if(data.get(i).equals(note)){
+            if (data.get(i).equals(note)) {
                 data.set(i, note);
                 return i;
             }
@@ -147,7 +147,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
 
                     itemView.showContextMenu();
 
-                    if (getLongClicklistener()!= null) {
+                    if (getLongClicklistener() != null) {
                         getLongClicklistener().onNoteLongClicked(data.get(getAdapterPosition()));
                     }
                     return true;
