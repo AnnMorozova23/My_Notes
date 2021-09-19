@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -18,18 +18,18 @@
                 android:id="@+id/note_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-                tools:text="Note" />
+                android:layout_margin="@dimen/default_margin"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                tools:text="Note Header" />
 
             <ImageView
                 android:id="@+id/note_image"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/note_image"
-                android:scaleType="centerCrop"
-                tools:src="@mipmap/ic_launcher" />
+                android:layout_height="@dimen/note_image_height"
+                tools:src="@mipmap/ic_launcher_round" />
         </LinearLayout>
 
-
     </com.google.android.material.card.MaterialCardView>
+
 
 </FrameLayout>
